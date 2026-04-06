@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 6%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 18% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 142 60% 50%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 39 90% 55%;
+    --secondary-foreground: 220 20% 6%;
+
+    --accent: 215 80% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 55%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 142 60% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --glow-green: 142 60% 50%;
+    --glow-saffron: 39 90% 55%;
+    --glow-blue: 215 80% 55%;
+    --surface-elevated: 220 18% 12%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  ::selection {
+    background: hsl(142 60% 50% / 0.3);
+    color: hsl(0 0% 100%);
+  }
+}
+
+@layer utilities {
+  .glow-green {
+    box-shadow: 0 0 20px hsl(142 60% 50% / 0.15), 0 0 60px hsl(142 60% 50% / 0.05);
+  }
+  .glow-saffron {
+    box-shadow: 0 0 20px hsl(39 90% 55% / 0.15), 0 0 60px hsl(39 90% 55% / 0.05);
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px hsl(215 80% 55% / 0.15), 0 0 60px hsl(215 80% 55% / 0.05);
+  }
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(142 60% 50% / 0.3), hsl(215 80% 55% / 0.3), hsl(39 90% 55% / 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
+  .text-gradient-green {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(142,60%,50%)] to-[hsl(142,60%,70%)];
+  }
+  .text-gradient-saffron {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(39,90%,55%)] to-[hsl(39,90%,70%)];
+  }
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(215,80%,55%)] to-[hsl(215,80%,70%)];
+  }
+}
